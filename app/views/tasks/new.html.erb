@@ -1,8 +1,5 @@
-<%= form_with(model: @task, local: true) do |f| %>
-  <%= f.label :content, '内容' %>
-  <%= f.text_field :content %>
+<h1>新規業務</h1>
 
-  <%= f.submit '業務内容提出' %>
-<% end %>
+<%= render 'form', task: @task %>
 
 <%= link_to '一覧に戻る', tasks_path %>
