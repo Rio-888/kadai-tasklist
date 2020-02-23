@@ -1,5 +1,5 @@
 class Task < ApplicationRecord
+    belongs_to :user
     validates :status, presence: true, length: { maximum: 10 }
     validates :tasks, presence: true, length: { maximum: 255 }
-    has_secure_password
 end
