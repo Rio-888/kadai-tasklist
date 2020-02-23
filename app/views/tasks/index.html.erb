@@ -1,36 +1,26 @@
-<% if logged_in? %>
-  <h1>本日の業務</h1>
+<h1>本日の業務</h1>
 
-  <% if @tasks.any? %>
-    <table class="table table-striped">
-      <thead>
+<% if @tasks.any? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>タスクID</th>
+        <th>ステータス</th>
+        <th>タスク</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tasks.each do |task| %>
         <tr>
-          <th>タスクID</th>
-          <th>ステータス</th>
-          <th>タスク</th>
+          <td><%= link_to task.id, task %></td>
+          <td><%= task.status %></td>
+          <td><%= task.tasks %></td>
         </tr>
-      </thead>
-      <tbody>
-        <% @tasks.each do |task| %>
-          <tr>
-            <td><%= link_to task.id, task %></td>
-            <td><%= task.status %></td>
-            <td><%= task.tasks %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <div>
-      <%= paginate @tasks %>
-    </div>
-  <% end %>
-  <%= link_to 'タスク追加', newtask_path, class: 'btn btn-lg btn-primary' %>
-<% else %>
-  <div class="center jumbotron">
-    <div class="text-center">
-      <h1>ようこそタスク管理へ</h1>
-      <%= link_to 'ログイン画面へ', login_path, class: 'mt-2 btn btn-lg btn-primary' %>
-      <p>新規の方は<%= link_to '新規登録', signup_path %></p>
-    </div>
+      <% end %>
+    </tbody>
+  </table>
+  <div>
+    <%= paginate @tasks %>
   </div>
 <% end %>
+<%= link_to 'タスク追加', newtask_path, class: 'btn btn-lg btn-primary' %>

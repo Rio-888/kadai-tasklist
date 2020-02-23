@@ -2,7 +2,11 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   
   def index
-    @tasks = Task.where(user_id: session[:user_id]).page(params[:page])
+    if logged_in?
+      @tasks = Task.where(user_id: session[:user_id]).page(params[:page])
+    else
+      redirect_to login_path
+    end
   end
 
   def show

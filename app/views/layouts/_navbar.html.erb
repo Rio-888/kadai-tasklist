@@ -1,6 +1,10 @@
 <header class="mb-4">
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">タスク管理</a>
+    <% if logged_in? %>
+      <a class="navbar-brand" href="/">タスク管理</a>
+    <% else %>
+      <%= link_to 'タスク管理', login_path, class: 'navbar-brand' %>
+    <% end %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
       <span class="navbar-toggler-icon"></span>
     </button>
