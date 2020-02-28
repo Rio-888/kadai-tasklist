@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
-  before_action :require_login
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:show, :edit, :update, :destroy]
   
   def index
     if logged_in?
@@ -50,19 +50,19 @@ class TasksController < ApplicationController
   end
   
   private
-  
-  def require_login
-    unless logged_in?
-      flash[:denger] = "ログインしてください"
-      redirect_to login_path
-    end
-  end
-  
+
   def set_task
     @task = Task.find(params[:id])
   end
   
   def task_params
     params.require(:task).permit(:status, :tasks)
+  end
+  
+  def correct_user
+    if @task.user_id = current_user.id
+    else
+      redirect_to root_url
+    end
   end
 end
