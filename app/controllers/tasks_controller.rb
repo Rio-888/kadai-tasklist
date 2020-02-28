@@ -60,8 +60,7 @@ class TasksController < ApplicationController
   end
   
   def correct_user
-    if @task.user_id = current_user.id
-    else
+    if @task.blank? || @task.user_id != current_user.id
       redirect_to root_url
     end
   end
