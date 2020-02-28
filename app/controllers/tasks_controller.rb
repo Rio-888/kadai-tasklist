@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :require_login
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
   
   def index
     if logged_in?
@@ -45,7 +46,7 @@ class TasksController < ApplicationController
     @task.destroy
 
     flash[:success] = 'Task は正常に削除されました'
-    redirect_to tasks_url
+    redirect_to root_url
   end
   
   private
@@ -55,6 +56,10 @@ class TasksController < ApplicationController
       flash[:denger] = "ログインしてください"
       redirect_to login_path
     end
+  end
+  
+  def set_task
+    @task = Task.find(params[:id])
   end
   
   def task_params
